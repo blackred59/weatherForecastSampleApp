@@ -7,14 +7,14 @@ COPY ["sample-app.csproj", "./"]
 RUN dotnet restore "sample-app.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "sample-app.csproj" -c Release -o /app/build 
+RUN dotnet build "sample-app.csproj" -c Release -o /src/build 
 
 FROM build AS publish
-RUN dotnet publish "sample-app.csproj" -c Release -o /app/publish
+RUN dotnet publish "sample-app.csproj" -c Release -o /src/publish
 
 FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-EXPOSE 5000/tcp
+WORKDIR /src
+COPY --from=publish /src/publish .
+EXPOSE 5000
 ENV ASPNETCORE_URLS http://*:5000
 ENTRYPOINT ["dotnet", "sample-app.dll"]
