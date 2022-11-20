@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rsweatherforecastdemo
+  name: rsweatherforecastdemo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rsweatherforecastdemo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rsweatherforecastdemo
+    spec:
+      containers:
+      - image: blackred59/sample-app
+        name: sample-app
