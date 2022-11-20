@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rsweatherforecastdemo
+  name: rsweatherforecastdemo
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+    nodePort: 30007
+  selector:
+    app: rsweatherforecastdemo
+  type: NodePort
